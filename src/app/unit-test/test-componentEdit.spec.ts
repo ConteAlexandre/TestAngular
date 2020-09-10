@@ -1,9 +1,14 @@
-import ContactClass from '../contacts/shared/models/contact';
-import { ContactsComponent} from '../contacts';
 import {Contact} from '../contacts/shared/models';
-import {ComponentFixture} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ContactEditComponent} from '../contacts/contact-edit';
 import {DebugElement} from '@angular/core';
+import {FavoriteIconDirective} from '../contacts/shared/favorite-icon';
+import {ContactService, InvalidEmailModalComponent, InvalidPhoneNumberModalComponent} from '../contacts/shared';
+import {AppMaterialModule} from '../app.material.module';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterTestingModule} from '@angular/router/testing';
+import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
 
 describe('ContactComponent', () => {
     let fixture: ComponentFixture<ContactEditComponent>;
@@ -29,18 +34,42 @@ describe('ContactComponent', () => {
     };
 
     beforeEach(() => {
-        contactComponent = new ContactsComponent();
+        TestBed.configureTestingModule({
+            declarations: [ ContactEditComponent, FavoriteIconDirective, InvalidEmailModalComponent, InvalidPhoneNumberModalComponent],
+            imports: [
+                AppMaterialModule,
+                FormsModule,
+                NoopAnimationsModule,
+                RouterTestingModule
+            ],
+            providers: [{provide: ContactService, useValue: contactServiceStub}]
+        });
+        TestBed.overrideModule(BrowserDynamicTestingModule, {
+            set: {
+                entryComponents: [InvalidEmailModalComponent, InvalidPhoneNumberModalComponent]
+            }
+        });
     });
 
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ContactEditComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        rootElement = fixture.debugElement;
+    });
     // save contact
-
+    describe('save contact', () => {
+        it('display name after save', function () {
+            const contact = {
+                id: 1,
+                name: 'homer'
+            };
+            component.isLoading = false;
+        });
+    })
     // load contact
 
     // update contact
 
     // use case : wrong phone number
-
-    afterEach(() => {
-        contactComponent = null;
-    });
 });
