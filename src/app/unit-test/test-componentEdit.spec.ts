@@ -1,5 +1,5 @@
 import {Contact} from '../contacts/shared/models';
-import {ComponentFixture, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {ContactEditComponent} from '../contacts/contact-edit';
 import {DebugElement} from '@angular/core';
 import {FavoriteIconDirective} from '../contacts/shared/favorite-icon';
@@ -60,7 +60,7 @@ describe('ContactComponent', () => {
     });
     // save contact
     describe('save contact', () => {
-        it('display name after save', function () {
+        it('display name after save', fakeAsync(() => {
             const contact = {
                 id: 1,
                 name: 'homer'
@@ -71,7 +71,7 @@ describe('ContactComponent', () => {
             const nameInput = rootElement.query(By.css('.contact-name'));
             tick();
             expect(nameInput.nativeElement.value).toBe('homer');
-        });
+        }));
     });
     // load contact
 
