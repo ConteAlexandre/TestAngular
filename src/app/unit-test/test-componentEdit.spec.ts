@@ -1,5 +1,5 @@
 import {Contact} from '../contacts/shared/models';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, tick} from '@angular/core/testing';
 import {ContactEditComponent} from '../contacts/contact-edit';
 import {DebugElement} from '@angular/core';
 import {FavoriteIconDirective} from '../contacts/shared/favorite-icon';
@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
+import {By} from '@angular/platform-browser';
 
 describe('ContactComponent', () => {
     let fixture: ComponentFixture<ContactEditComponent>;
@@ -65,8 +66,13 @@ describe('ContactComponent', () => {
                 name: 'homer'
             };
             component.isLoading = false;
+            component.saveContact(contact);
+            fixture.detectChanges();
+            const nameInput = rootElement.query(By.css('.contact-name'));
+            tick();
+            expect(nameInput.nativeElement.value).toBe('homer');
         });
-    })
+    });
     // load contact
 
     // update contact
