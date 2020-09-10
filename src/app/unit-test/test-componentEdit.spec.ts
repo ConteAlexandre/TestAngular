@@ -74,7 +74,14 @@ describe('ContactComponent', () => {
         }));
     });
     // load contact
-
+    // describe('load test', () => {
+    //     component.isLoading = false;
+    //     component.loadContact();
+    //     fixture.detectChanges();
+    //     const nameInput = rootElement.query(By.css('.contact-name'));
+    //     tick();
+    //     expect(nameInput.nativeElement.value).toBe('Donald the best');
+    // });
     // update contact
     describe('update contact', () => {
         it('display name after update', fakeAsync(() => {
