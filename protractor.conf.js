@@ -9,7 +9,7 @@ exports.config = {
     'e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    browserName: 'chrome',
+    browserName: 'firefox',
     chromeOptions: {
       args: (process.env.IS_CIRCLE ? ['--headless'] : [])
     }
