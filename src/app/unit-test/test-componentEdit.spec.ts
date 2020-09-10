@@ -76,6 +76,25 @@ describe('ContactComponent', () => {
     // load contact
 
     // update contact
-
+    describe('update contact', () => {
+        it('display name after update', fakeAsync(() => {
+            const contact = {
+                id: 1,
+                name: 'barack',
+                email: 'barack@gmail.com',
+                number: '2125551235',
+            };
+            component.isLoading = false;
+            component.updateContact(contact);
+            fixture.detectChanges();
+            const nameInput = rootElement.query(By.css('.contact-name'));
+            const emailInput = rootElement.query(By.css('.contact-email'));
+            const numberInput = rootElement.query(By.css('.contact-number'));
+            tick(500);
+            expect(nameInput.nativeElement.value).toBe('barack');
+            expect(emailInput.nativeElement.value).toBe('barack@gmail.com');
+            expect(numberInput.nativeElement.value).toBe('2125551235');
+        }));
+    });
     // use case : wrong phone number
 });
